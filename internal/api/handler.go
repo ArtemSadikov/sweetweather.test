@@ -15,13 +15,13 @@ func (s *Server) HandleCalculate() http.HandlerFunc {
 		var body CalucalateBody
 
 		if err := json.NewDecoder(r.Body).Decode(&body); err != nil {
-			response.WriteErrResponse(w, "bad request")
+			response.WriteErrResponse(w, http.StatusBadRequest, "bad request")
 			return
 		}
 
 		res, err := s.uc.Calculate(body.Data)
 		if err != nil {
-			response.WriteErrResponse(w, err.Error())
+			response.WriteErrResponse(w, http.StatusInternalServerError, err.Error())
 			return
 		}
 

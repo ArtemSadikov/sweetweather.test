@@ -13,7 +13,7 @@ func authMiddleware(h http.Handler) http.Handler {
 		if header != "superuser" {
 			msg := "unauthorized"
 			log.Print(msg)
-			response.WriteErrResponse(w, msg)
+			response.WriteErrResponse(w, http.StatusUnauthorized, msg)
 			return
 		}
 

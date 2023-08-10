@@ -7,7 +7,7 @@ import (
 
 func WriteOkResponse(w http.ResponseWriter, value interface{}) {
 	if value == nil {
-		WriteErrResponse(w, "internal")
+		WriteErrResponse(w, http.StatusInternalServerError, "internal")
 		return
 	}
 	res, _ := json.Marshal(value)
