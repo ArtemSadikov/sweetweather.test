@@ -1,8 +1,8 @@
 package api
 
 import (
-	"encoding/json"
 	"net/http"
+	"sweetweather.test/pkg/response"
 )
 
 func authMiddleware(h http.Handler) http.Handler {
@@ -10,11 +10,7 @@ func authMiddleware(h http.Handler) http.Handler {
 		header := r.Header.Get("User-Access")
 
 		if header != "superuser" {
-			res, _ := json.Marshal(struct{ message string }{
-				message: "unauthorized",
-			})
-			w.Header().Add("Content-type", "application/json")
-			_, _ = w.Write(res)
+			response.WriteErrResponse(w, "unauthorized")
 			return
 		}
 

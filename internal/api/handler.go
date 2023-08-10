@@ -26,9 +26,9 @@ func (s *Server) HandleCalculate() http.HandlerFunc {
 		}
 
 		response.WriteOkResponse(w, struct {
-			data int
+			Data int `json:"data"`
 		}{
-			data: res,
+			Data: res,
 		})
 	}
 }
