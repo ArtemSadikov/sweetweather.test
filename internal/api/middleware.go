@@ -1,6 +1,7 @@
 package api
 
 import (
+	"log"
 	"net/http"
 	"sweetweather.test/pkg/response"
 )
@@ -10,7 +11,9 @@ func authMiddleware(h http.Handler) http.Handler {
 		header := r.Header.Get("User-Access")
 
 		if header != "superuser" {
-			response.WriteErrResponse(w, "unauthorized")
+			msg := "unauthorized"
+			log.Print(msg)
+			response.WriteErrResponse(w, msg)
 			return
 		}
 
